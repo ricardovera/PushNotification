@@ -1,34 +1,18 @@
 <?php
 
-class Ricardovera_PushNotification_Model_Observer{
-    /**
-     * Magento pasa como primer parámetro de los eventos un Varien_Event_Observer
-     */
-    public function control(Varien_Event_Observer $observer){
-         // Recupera el producto que está siendo actualizado desde el evento observador.
-         $product = $observer->getEvent()->getProduct();
-
-         // Escribe una nueva linea en var/log/product-updates.log
-         $name = $product->getName();
-         $sku = $product->getSku();
-         Mage::log(
-            "{$name} ({$sku}) updated",
-            null,
-            'product-updates.log'
-         );
-    }
-    public function implementOrderStatus(Varien_Event_Observer $observer)
+class Ricardovera_PushNotification_Model_Observer extends Varien_Event_Observer{
+    public function sales_order_status_change_handler(Varien_Event_Observer $observer)
         {
-            $tokens = ['TOKENIDNAVEGADOR'];
+            $tokens = ['eIzqV_bEEwc:APA91bGGHxUi1KdzMhEWa3-hzKzphMhA7KMVbYjylIBR-oTd09Nx2XEyOZFbIN7e0li-NB5jA-hkhDPbMjaHlCP9012g2_tEZD4WaapbOVAY8-8E6G7FqnrYOirqHeqV7LCqlx1on5JQ'];
     
             $header = [
-                'Authorization: Key=KEY_FIREBASE',
+                'Authorization: Key=AIzaSyBIpekMXINpkqdU_iUWBrnwXmLNYW7UPg0',
                 'Content-Type: Application/json'
             ];
 
             $msg = [
                 'title' => 'TiendaMia',
-                'body' => 'Estado de orden modificada',
+                'body' => 'Estado de orden modificada por magento',
                 'icon' => 'img/icon.png',
                 'image' => 'img/image.png',
                 'click_action' => 'https://www.google.com.pe',

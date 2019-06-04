@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Ricardovera_PushNotification>
-			<active>false</active>
+			<active>true</active>
 			<codePool>community</codePool>
 		</Ricardovera_PushNotification>
 	</modules>
@@ -15,23 +15,14 @@
 		<events>
 			<sales_order_status_change>
 		        <observers>
-		          <sales_order_status_change_handler> 
-		            <type>singleton</type> 
-		            <class>ricardovera_pushnotification/observer</class>
-		            <method>implementOrderStatus</method>
+		          <Ricardovera_PushNotification_Model_Observer> 
+		          	<type>singleton</type>
+                    <class>ricardovera_pushnotification/observer</class>
+                    <method>sales_order_status_change_handler</method>
 		            <args></args>
-		          </sales_order_status_change_handler>
+		          </Ricardovera_PushNotification_Model_Observer>
 		        </observers>
 		    </sales_order_status_change>
-			<catalog_product_save_after>
-				<observers>
-					<ricardovera_pushnotification>
-                        <class>ricardovera_pushnotification/observer</class>
-                        <method>control</method>
-						<type>singleton</type>
-					</ricardovera_pushnotification>
-				</observers>
-			</catalog_product_save_after>
 		</events>
 		<resources>
                 <ricardovera_pushnotification_setup>
